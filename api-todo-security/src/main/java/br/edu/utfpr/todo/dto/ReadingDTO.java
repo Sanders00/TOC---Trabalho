@@ -17,5 +17,5 @@ public class ReadingDTO {
     private String unit;
 
     @NotNull
-    private String sensorId;
+    private String sensor_id;
 }

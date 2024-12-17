@@ -5,7 +5,7 @@ const isAuthenticated = require('../middlewares/isAuthenticated');
 const router = express.Router();
 
 // Rota para criar um evento
-router.post('/',isAuthenticated, async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
   const { deviceId, type, description, status } = req.body;
 
   try {
@@ -23,7 +23,7 @@ router.post('/',isAuthenticated, async (req, res) => {
 });
 
 // Rota para listar todos os eventos
-router.get('/',isAuthenticated, async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
   try {
     const events = await Event.find();
     res.json(events);
@@ -34,7 +34,7 @@ router.get('/',isAuthenticated, async (req, res) => {
 });
 
 // Rota para atualizar um evento por ID
-router.put('/:id',isAuthenticated, async (req, res) => {
+router.put('/:id', isAuthenticated, async (req, res) => {
   try {
     const event = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!event) return res.status(404).json({ message: 'Event not found' });
@@ -46,7 +46,7 @@ router.put('/:id',isAuthenticated, async (req, res) => {
 });
 
 // Rota para deletar um evento por ID
-router.delete('/:id',isAuthenticated, async (req, res) => {
+router.delete('/:id', isAuthenticated, async (req, res) => {
   try {
     const event = await Event.findByIdAndDelete(req.params.id);
     if (!event) return res.status(404).json({ message: 'Event not found' });

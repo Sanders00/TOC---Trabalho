@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   const login = (newToken) => {
+    console.log(newToken);
     setToken(newToken);
     localStorage.setItem('token', newToken);
   };

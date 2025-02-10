@@ -15,7 +15,7 @@ const Login = () => {
     setError('');
     try {
       const data = await login(username, password);
-      setToken(data.token); // Salva o token no contexto
+      setToken(data['jwt-token']); // Salva o token no contexto
       navigate('/'); // Redireciona para a Home
     } catch (err) {
       setError('Login falhou. Verifique suas credenciais.');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; // Hook para obter o token de autenticação
-import { fetchWithAuth } from '../services/api';
+import { post } from '../services/api';
 
 const CreateUser = () => {
   const { token } = useAuth(); // Obtenha o token do contexto de autenticação
@@ -28,12 +28,9 @@ const CreateUser = () => {
 
     try {
       console.log(formData);
-      await fetchWithAuth('person', token, {
-        method: 'POST',
-        body: formData,
-      });
+      await post('person', token, formData);
 
-      alert('Sensor criado com sucesso!');
+      alert('Usuario criado com sucesso!');
       setFormData({
         name: '',
         email: '',

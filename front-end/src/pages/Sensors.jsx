@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchWithAuth } from '../services/api';
+import { fetchWithAuth, remove } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const SensorPage = () => {
@@ -24,15 +24,16 @@ const SensorPage = () => {
   const deleteSensor = async (sensorId) => {
     const confirmed = window.confirm('Tem certeza que deseja excluir este sensor?');
     if (!confirmed) return;
-  
-    try {
-      await fetchWithAuth(`sensor/${sensorId}`, token, { method: 'DELETE' });
-      alert('Sensor excluído com sucesso.');
-      fetchSensors(data.number);
-    } catch (error) {
-      console.error(error.message);
-      alert('Erro ao excluir o sensor.');
-    }
+
+    remove(`sensor/${sensorId}`, token)
+      .then(() => {
+        alert('Sensor excluído com sucesso.');
+        fetchSensors(data.number);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        alert('Erro ao excluir o sensor.');
+      });
   };
 
   useEffect(() => {

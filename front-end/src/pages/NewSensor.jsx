@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; // Hook para obter o token de autenticação
-import { fetchWithAuth } from '../services/api';
+import { fetchWithAuth, post } from '../services/api';
 
 const CreateSensor = () => {
   const { token } = useAuth(); // Obtenha o token do contexto de autenticação
+  
   const [formData, setFormData] = useState({
     name: '',
     location: '',
@@ -27,10 +28,10 @@ const CreateSensor = () => {
     setLoading(true);
 
     try {
-      await fetchWithAuth('sensor', token, {
-        method: 'POST',
-        body: formData,
-      });
+      console.log(formData);
+      console.log(token);
+
+      await post('sensor', token, formData);
 
       alert('Sensor criado com sucesso!');
       setFormData({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchWithAuth } from '../services/api';
+import { fetchWithAuth, remove } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const ReadingPage = () => {
@@ -23,14 +23,15 @@ const ReadingPage = () => {
     const confirmed = window.confirm('Tem certeza que deseja excluir esta leitura?');
     if (!confirmed) return;
   
-    try {
-      await fetchWithAuth(`reading/${readingId}`, token, { method: 'DELETE' });
-      alert('leitura excluída com sucesso.');
-      fetchReadings(data.number);
-    } catch (error) {
-      console.error(error.message);
-      alert('Erro ao excluir a leitura.');
-    }
+    remove(`reading/${readingId}`, token)
+          .then(() => {
+            alert('Leitura excluído com sucesso.');
+            fetchReadings(data.number);
+          })
+          .catch((error) => {
+            console.error(error.message);
+            alert('Erro ao excluir o leitura.');
+          });
   };
 
   useEffect(() => {

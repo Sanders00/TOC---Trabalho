@@ -15,6 +15,16 @@ const PrivateRoute = ({ children }) => {
 };
 
 const PageHeader = () => {
+  const { token, login, logout } = useAuth(); // Obtém o estado de autenticação e funções do contexto
+
+  const handleLogin = () => {
+    // Aqui você pode redirecionar para a página de login
+    console.log('Redirecionar para login');
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -36,8 +46,15 @@ const PageHeader = () => {
               <Link to="/users" className="nav-link active">Usuários</Link>
             </li>
           </ul>
-          
         </div>
+        {token ? (
+          <button className="btn btn-danger" onClick={handleLogout}>
+            Logoff
+          </button>
+        ) : (
+          null
+        )}
+        
       </div>
     </nav>
   );

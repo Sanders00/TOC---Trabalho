@@ -1,7 +1,8 @@
 # api1/Dockerfile
 FROM maven:3.8.6-eclipse-temurin-17 AS build
 WORKDIR /app
-COPY . .
+# Copia apenas os arquivos de api1
+COPY api1/ .
 RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine

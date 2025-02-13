@@ -1,9 +1,11 @@
 # Front-end (React) - Dockerfile
 FROM node:18-alpine AS build
 WORKDIR /app
-COPY package*.json ./
+# Copia os arquivos package.json do diretório 'frontend'
+COPY frontend/package*.json ./
 RUN npm install
-COPY . .
+# Copia o restante dos arquivos do diretório 'frontend'
+COPY frontend/ ./
 RUN npm run build
 
 FROM nginx:alpine

@@ -32,6 +32,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tac
       SPRING_DATASOURCE_USERNAME: tac_owner
       SPRING_DATASOURCE_PASSWORD: jDSEyoLUhI37
+    ports:
+      - "8080:8080"
     depends_on:
       - postgres
 

@@ -1,8 +1,9 @@
-# API 2 (Express) - Dockerfile
-FROM node:18-alpine
+# api2/Dockerfile
+FROM node:18-alpine AS build
 WORKDIR /app
-COPY package*.json ./
+# Ajusta o caminho para copiar o package.json da pasta api2
+COPY api2/package*.json ./
 RUN npm install
-COPY . .
-EXPOSE 3000
+COPY api2/ ./
+# Aqui você pode definir os comandos para iniciar a aplicação
 CMD ["npm", "start"]
